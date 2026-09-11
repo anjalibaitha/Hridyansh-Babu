@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, Expand, X } from "lucide-react";
-import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import ScratchCanvas from "./scratch-canvas";
 
 type Photo = { src: string; width: number; height: number; caption: string; alt: string };
 const rotations = [-2, 1.5, -1, 2, -1.5, 1];
@@ -34,79 +35,73 @@ const memoryQuotes = [
   ["A golden little memory from a year we will always treasure.", "सधैं साँचेर राख्ने हाम्रो पहिलो वर्षको सुनौलो सम्झना।"],
 ] as const;
 
-function ScratchLayer({ onReveal, onActivity }: { onReveal: () => void; onActivity: () => void }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const strokes = useRef(0);
-  const scratching = useRef(false);
-  const [revealed, setRevealed] = useState(false);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const bounds = canvas.getBoundingClientRect();
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.max(1, Math.round(bounds.width * ratio));
-    canvas.height = Math.max(1, Math.round(bounds.height * ratio));
-    const context = canvas.getContext("2d");
-    if (!context) return;
-    context.scale(ratio, ratio);
-    const wash = context.createLinearGradient(0, 0, bounds.width, bounds.height);
-    wash.addColorStop(0, "#9bd2ee");
-    wash.addColorStop(.52, "#fff2bd");
-    wash.addColorStop(1, "#5aa9d2");
-    context.fillStyle = wash;
-    context.fillRect(0, 0, bounds.width, bounds.height);
-    context.fillStyle = "rgba(255,255,255,.5)";
-    context.font = "600 13px Manrope, sans-serif";
-    context.textAlign = "center";
-    context.fillText("SCRATCH TO REVEAL", bounds.width / 2, bounds.height / 2 - 4);
-    context.font = "12px 'Noto Sans Devanagari', sans-serif";
-    context.fillText("माया भेट्टाउनुहोस्", bounds.width / 2, bounds.height / 2 + 19);
-  }, []);
-
-  function scratch(event: PointerEvent<HTMLCanvasElement>) {
-    if (revealed) return;
-    onActivity();
-    event.preventDefault();
-    event.stopPropagation();
-    const canvas = canvasRef.current;
-    const context = canvas?.getContext("2d");
-    if (!canvas || !context) return;
-    const bounds = canvas.getBoundingClientRect();
-    const x = event.clientX - bounds.left;
-    const y = event.clientY - bounds.top;
-    context.globalCompositeOperation = "destination-out";
-    context.beginPath();
-    context.arc(x, y, 27, 0, Math.PI * 2);
-    context.fill();
-    strokes.current += 1;
-    if (strokes.current >= 18) {
-      setRevealed(true);
-      onReveal();
-    }
-  }
-
-  if (revealed) return null;
-  return <canvas ref={canvasRef} className="scratch-layer" aria-label="Scratch to reveal this memory" onPointerDown={event => { scratching.current = true; scratch(event); }} onPointerMove={event => { if (event.buttons || scratching.current) scratch(event); }} onPointerUp={event => { scratching.current = false; event.stopPropagation(); }} onPointerCancel={() => { scratching.current = false; }} onClick={event => event.stopPropagation()} />;
-}
-
 function ScratchCard({ item, index, onOpen, onActivity }: { item: Photo; index: number; onOpen: () => void; onActivity: () => void }) {
   const [revealed, setRevealed] = useState(false);
   const justRevealed = useRef(false);
   const quote = memoryQuotes[index % memoryQuotes.length];
+
   return (
-    <button type="button" className="memory-card" aria-label={`${revealed ? "Open" : "Reveal"} memory ${index + 1}: ${item.caption}`} onClick={() => {
-      if (justRevealed.current) { justRevealed.current = false; return; }
-      if (revealed) onOpen(); else setRevealed(true);
-    }}>
+    <div
+      className="memory-card"
+      role="region"
+      aria-label={`${revealed ? "View" : "Scratch to reveal"} memory ${index + 1}: ${item.caption}`}
+      onClick={() => {
+        if (justRevealed.current) {
+          justRevealed.current = false;
+          return;
+        }
+        if (revealed) onOpen();
+      }}
+    >
       <span className="memory-photo">
-        <Image src={item.src} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 480px) 78vw, (max-width: 768px) 60vw, (max-width: 1024px) 42vw, 290px" loading="eager" />
-        {!revealed && <ScratchLayer onActivity={onActivity} onReveal={() => { justRevealed.current = true; setRevealed(true); }} />}
-        <span className="memory-expand" aria-hidden="true"><Expand size={16} /></span>
+        <Image
+          src={item.src}
+          alt={item.alt}
+          width={item.width}
+          height={item.height}
+          sizes="(max-width: 480px) 78vw, (max-width: 768px) 60vw, (max-width: 1024px) 42vw, 290px"
+          loading="eager"
+        />
+        {!revealed && (
+          <ScratchCanvas
+            brushRadius={24}
+            threshold={50}
+            coverTitle="SCRATCH PHOTO"
+            coverSubtitle="माया हेर्नुहोस्"
+            onActivity={onActivity}
+            onReveal={() => {
+              justRevealed.current = true;
+              setRevealed(true);
+            }}
+          />
+        )}
+        <button
+          type="button"
+          className="memory-expand"
+          aria-label={`Open memory ${index + 1} in full screen`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpen();
+          }}
+        >
+          <Expand size={16} />
+        </button>
       </span>
-      {revealed ? <span className="memory-quote"><span>{quote[0]}</span><span lang="ne">{quote[1]}</span></span> : <span className="scratch-hint">Scratch the card · <span lang="ne">कार्ड कोर्नुहोस्</span></span>}
-      <span className="memory-caption">{item.caption}<span>{String(index + 1).padStart(2, "0")}</span></span>
-    </button>
+      {revealed ? (
+        <span className="memory-quote">
+          <span>{quote[0]}</span>
+          <span lang="ne">{quote[1]}</span>
+        </span>
+      ) : (
+        <span className="scratch-hint">
+          Scratch 50% to reveal · <span lang="ne">५०% कोरेर हेर्नुहोस्</span>
+        </span>
+      )}
+      <span className="memory-caption">
+        {item.caption}
+        <span>{String(index + 1).padStart(2, "0")}</span>
+      </span>
+    </div>
   );
 }
 

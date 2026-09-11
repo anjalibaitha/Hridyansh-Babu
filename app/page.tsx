@@ -4,6 +4,7 @@ import InvitationShell from "@/components/invitation/invitation-shell";
 import SkyDecor from "@/components/invitation/sky-decor";
 import Countdown from "@/components/invitation/countdown";
 import MemoriesGallery from "@/components/invitation/memories-gallery";
+import SecretBirthdayScratch from "@/components/invitation/secret-birthday-scratch";
 import photos from "@/lib/baby-photos.json";
 
 export default function Home() {
@@ -54,6 +55,8 @@ export default function Home() {
             <MemoriesGallery photos={photos} />
           </div>
         </section>
+
+        <SecretBirthdayScratch />
 
         <section className="blessing-section" id="details">
           <div className="section-inner">
