@@ -13,17 +13,17 @@ const sampleBabyPhotos = [
   {
     src: "/WhatsApp%20Image%202026-09-10%20at%2022.51.13%20(1).jpeg",
     caption: "Our Prince Turns One",
-    nepali: "पहिलो जन्मदिन",
+    hindi: "पहला जन्मदिन",
   },
   {
     src: "/WhatsApp%20Image%202026-09-10%20at%2014.48.56%20(1).jpeg",
     caption: "Tiny Steps, Endless Joy",
-    nepali: "मिठो मुस्कान",
+    hindi: "प्यारी मुस्कान",
   },
   {
     src: "/WhatsApp%20Image%202026-09-10%20at%2014.49.00%20(1).jpeg",
     caption: "Pure Love & Blessings",
-    nepali: "असिम आशीर्वाद",
+    hindi: "अनंत आशीर्वाद",
   },
 ];
 
@@ -248,8 +248,8 @@ export default function CinematicOpening({ isOpen, onComplete }: CinematicOpenin
         <h1 className="cinematic-prince-title animate-rise delay-1">
           Hridyansh <span>Babu</span>
         </h1>
-        <p className="cinematic-nepali-blessing animate-rise delay-2" lang="ne">
-          पहिलो जन्मदिनको हार्दिक मंगलमय शुभकामना!
+        <p className="cinematic-invitation-line animate-rise delay-2" lang="en">
+          Please join us to celebrate Hridyansh Babu’s first birthday.
         </p>
 
         {/* The 3-Tier Birthday Cake with Candle */}
@@ -315,7 +315,7 @@ export default function CinematicOpening({ isOpen, onComplete }: CinematicOpenin
           <div className="cake-platter" />
 
           <p className="cake-tap-prompt">
-            {candleLit ? "Tap cake candle to make a wish! 🎂" : "Wish granted! ✨ जीवेम शरदः शतम् ।"}
+            {candleLit ? "Tap cake candle to make a wish! 🎂" : "Wish granted! ✨"}
           </p>
         </div>
 
@@ -335,7 +335,7 @@ export default function CinematicOpening({ isOpen, onComplete }: CinematicOpenin
               </div>
               <span className="montage-caption">
                 {photo.caption}
-                <small lang="ne">{photo.nepali}</small>
+                <small lang="hi">{photo.hindi}</small>
               </span>
             </div>
           ))}

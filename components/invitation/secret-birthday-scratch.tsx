@@ -36,10 +36,10 @@ export default function SecretBirthdayScratch() {
     <section className="secret-scratch-section" id="secret-wish" aria-labelledby="secret-wish-title">
       <div className="section-inner scratch-section-inner">
         <div className="scratch-header">
-          <p className="section-label">गोप्य शुभकामना · Cinematic Interactive Scratch Card</p>
+          <p className="section-label">गुप्त शुभकामना · Cinematic Interactive Scratch Card</p>
           <h2 className="section-title" id="secret-wish-title">
             Scratch to Reveal the Birthday Surprise
-            <span lang="ne"> · कार्ड कोरेर शुभकामना र केक हेर्नुहोस्</span>
+            <span lang="hi"> · कार्ड पर उंगली चलाकर शुभकामना और केक देखें</span>
           </h2>
           <p className="scratch-instructions">
             Touch and scratch the shimmering golden foil with your finger to reveal Hridyansh Babu’s photo, birthday cake, and heartfelt blessings. Auto-reveals at 50%!
@@ -139,10 +139,10 @@ export default function SecretBirthdayScratch() {
 
               <div className="secret-sanskrit-box">
                 <p className="secret-sanskrit" lang="sa">
-                  ॐ जीवेम शरदः शतम् ।
+                  ॐ जीवेम शरदः शतम्।
                 </p>
                 <span className="secret-sanskrit-sub">
-                  May you live a hundred joyful years! · सय वर्ष स्वस्थ र सुखी जीवन रहोस्।
+                  May you live a hundred joyful years! · सौ वर्ष स्वस्थ और सुखी जीवन जिएँ।
                 </span>
               </div>
 
@@ -154,7 +154,7 @@ export default function SecretBirthdayScratch() {
               {isRevealed && (
                 <div className="revealed-banner" aria-hidden="true">
                   <PartyPopper size={18} />
-                  <span>Blessing & Cake Revealed! · शुभकामना प्रकट भयो!</span>
+                  <span>Blessing & Cake Revealed! · शुभकामना प्रकट हुई!</span>
                   <PartyPopper size={18} />
                 </div>
               )}
@@ -167,7 +167,7 @@ export default function SecretBirthdayScratch() {
                 brushRadius={32}
                 threshold={50}
                 coverTitle="SCRATCH FOR CAKE & WISH"
-                coverSubtitle="यहाँ औंलाले कोर्नुहोस्"
+                coverSubtitle="उंगली से कार्ड पर रगड़ें"
                 onReveal={handleReveal}
                 onProgress={(p) => setScratchProgress(Math.min(100, Math.round(p)))}
               />
@@ -199,7 +199,7 @@ export default function SecretBirthdayScratch() {
                 aria-label="Scratch card again"
               >
                 <RotateCcw size={15} />
-                <span>Scratch Again · फेरि कोर्नुहोस्</span>
+                <span>Scratch Again · फिर से कोरें</span>
               </button>
             )}
           </div>

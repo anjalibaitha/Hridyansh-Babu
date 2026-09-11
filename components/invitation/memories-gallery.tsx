@@ -2,37 +2,36 @@
 
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, Expand, X } from "lucide-react";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { Fragment, useEffect, useRef, useState, type CSSProperties } from "react";
 import ScratchCanvas from "./scratch-canvas";
 
 type Photo = { src: string; width: number; height: number; caption: string; alt: string };
 const rotations = [-2, 1.5, -1, 2, -1.5, 1];
 const memoryQuotes = [
-  ["A proud little pose, held close in a moment of pure love.", "मायाले अँगालोमा सजिएको हाम्रो सानो राजकुमारको मिठो अदा।"],
-  ["Tiny hands, a curious heart, and a world waiting to be discovered.", "साना हात र जिज्ञासु मनले संसार चिन्न थालेको छ।"],
-  ["A happy family moment, made brighter by his tiny smile.", "नन्हो मुस्कानले परिवारको यो खुसी अझ उज्यालो बनायो।"],
-  ["Even in quiet dreams, he fills every corner with wonder.", "शान्त निद्रामै पनि उनले हाम्रो संसारलाई मायाले भरिदिन्छन्।"],
-  ["Under one umbrella, a whole little world of warmth.", "एउटै छातामुनि हाम्रो न्यानो सानो संसार।"],
-  ["The sweetest adventures are the ones we share together.", "सँगै बिताएका साना यात्राहरू नै सबैभन्दा मीठा सम्झना हुन्।"],
-  ["A family gathered close, with Hridyansh at the heart of it all.", "परिवारको बीचमा हृद्यांश, हाम्रो खुसीको केन्द्र।"],
-  ["A gentle cuddle and a brand-new story to tell.", "न्यानो काख र सुनाउन बाँकी एउटा नयाँ कथा।"],
-  ["Playful eyes, a brave little spirit, and endless sunshine.", "खेलिला आँखा, साहसी मन र घामजस्तै उज्यालो मुस्कान।"],
-  ["The little steps that turned an ordinary day into a memory.", "सानो चालले साधारण दिनलाई सुन्दर सम्झनामा बदलिदियो।"],
-  ["A celebration at home, wrapped in colour and laughter.", "रङ र हाँसोले सजिएको घरको प्यारो उत्सव।"],
-  ["A tiny explorer finding joy in every new place.", "नयाँ ठाउँमा पनि खुसी भेट्ने हाम्रो सानो अन्वेषक।"],
-  ["A favourite chair, a bright smile, and a heart full of mischief.", "मनपर्ने कुर्सी, उज्यालो मुस्कान र चञ्चल मन।"],
-  ["One gentle look that says more than a thousand words.", "हजार शब्दभन्दा धेरै कुरा भन्ने त्यो कोमल नजर।"],
-  ["Love looks like this: close, calm, and completely ours.", "माया यस्तै हुन्छ—नजिक, शान्त र हाम्रो आफ्नै।"],
-  ["His first year has been a gallery of little miracles.", "उनको पहिलो वर्ष साना चमत्कारहरूले भरिएको सुन्दर ग्यालरी हो।"],
-  ["A calm afternoon, a soft shirt, and a baby growing every day.", "शान्त दिउँसो, नरम लुगा र दिनदिनै बढ्दै गरेको हाम्रो बाबु।"],
-  ["A thoughtful little face, already carrying so much personality.", "व्यक्तित्वले भरिएको त्यो सोचमग्न सानो अनुहार।"],
-  ["Lifted high with love, laughter, and a whole family cheering.", "माया र हाँसोबीच माथि उठेको, परिवारको खुसीको आवाज।"],
-  ["Traditional colours, tender blessings, and a day to remember.", "परम्परागत रङ, न्यानो आशीर्वाद र सम्झनलायक दिन।"],
-  ["A sleepy pause between playtime and the next little adventure.", "खेलपछि अर्को सानो यात्राअघि आएको प्यारो निद्रा।"],
-  ["That first real grin—the kind that made everyone smile back.", "सबैलाई मुस्कुराउन बाध्य बनाउने त्यो पहिलो साँचो हाँसो।"],
-  ["A quiet profile and a bright future in the making.", "शान्त अनुहारमा लुकेको उज्यालो भविष्य।"],
-  ["Dressed in sunshine, ready to dance through his first year.", "घामजस्तै पहेँलो पहिरनमा पहिलो वर्ष नाच्न तयार।"],
-  ["A golden little memory from a year we will always treasure.", "सधैं साँचेर राख्ने हाम्रो पहिलो वर्षको सुनौलो सम्झना।"],
+  ["A soft portrait of Hridyansh, growing brighter every day.", "Hridyansh की प्यारी तस्वीर, जो हर दिन और निखरती जा रही है।"],
+  ["A little swing, a wide-eyed world, and endless wonder.", "नन्ही-सी झूला-यात्रा और आँखों में भरी पूरी दुनिया।"],
+  ["Bright eyes and a cheerful little seat.", "उजली आँखें और खुशियों से भरी नन्ही-सी कुर्सी।"],
+  ["A playful pose in his favourite red outfit.", "प्यारी लाल पोशाक में Hridyansh की शरारती अदा।"],
+  ["Curiosity begins with one favourite toy.", "जिज्ञासा की शुरुआत एक प्यारे खिलौने से होती है।"],
+  ["A tiny king enjoying his special seat.", "अपनी खास कुर्सी पर बैठा हमारा नन्हा राजा।"],
+  ["A colourful ball and a brand-new adventure.", "रंग-बिरंगी गेंद और एक नया नन्हा रोमांच।"],
+  ["One bright smile, ready for every new day.", "एक उजली मुस्कान, हर नए दिन के लिए तैयार।"],
+  ["A quiet little reader with a curious heart.", "जिज्ञासु मन वाला हमारा नन्हा पाठक।"],
+  ["Dressed in sunshine for a joyful celebration.", "खुशियों के उत्सव के लिए धूप जैसे रंगों में सजा।"],
+  ["A golden festive moment to treasure.", "सहेजकर रखने लायक सुनहरा उत्सवी पल।"],
+  ["The first days, held in the safest love.", "पहले दिनों की सबसे सुकून भरी गोद।"],
+  ["A gentle beginning to a lifetime of togetherness.", "साथ की पूरी उम्र की प्यारी शुरुआत।"],
+  ["Under one umbrella, love made a little world.", "एक छतरी के नीचे प्यार से बनी नन्ही दुनिया।"],
+  ["Warm arms, soft smiles, and a cherished memory.", "प्यार भरी बाँहें, कोमल मुस्कान और एक सहेजी याद।"],
+  ["A happy family moment with Hridyansh at the heart.", "Hridyansh के साथ परिवार का एक खुशहाल पल।"],
+  ["A loving cuddle on an ordinary, beautiful day.", "एक साधारण-से खूबसूरत दिन की प्यारी झप्पी।"],
+  ["Together is where every birthday story begins.", "हर जन्मदिन की कहानी साथ होने से शुरू होती है।"],
+  ["Playtime is brighter when shared with a friend.", "दोस्त के साथ खेल का हर पल और भी उजला हो जाता है।"],
+  ["A quiet blessing from a meaningful family moment.", "परिवार के इस भावपूर्ण पल का शांत आशीर्वाद।"],
+  ["A little umbrella day, remembered with love.", "प्यार से याद किया जाने वाला छतरी वाला दिन।"],
+  ["A tender outdoor moment shared with an older girl.", "एक बड़ी बच्ची के साथ बाहर बिताया प्यारा पल।"],
+  ["Lifted high by love and surrounded by celebration.", "प्यार और उत्सव के बीच ऊपर उठता नन्हा Hridyansh।"],
+  ["A colourful family portrait full of warmth.", "रंगों और अपनापन से भरा परिवार का प्यारा चित्र।"],
 ] as const;
 
 function ScratchCard({ item, index, onOpen, onActivity }: { item: Photo; index: number; onOpen: () => void; onActivity: () => void }) {
@@ -67,7 +66,7 @@ function ScratchCard({ item, index, onOpen, onActivity }: { item: Photo; index: 
             brushRadius={24}
             threshold={50}
             coverTitle="SCRATCH PHOTO"
-            coverSubtitle="माया हेर्नुहोस्"
+            coverSubtitle="प्यार देखें"
             onActivity={onActivity}
             onReveal={() => {
               justRevealed.current = true;
@@ -90,11 +89,11 @@ function ScratchCard({ item, index, onOpen, onActivity }: { item: Photo; index: 
       {revealed ? (
         <span className="memory-quote">
           <span>{quote[0]}</span>
-          <span lang="ne">{quote[1]}</span>
+          <span lang="hi">{quote[1]}</span>
         </span>
       ) : (
         <span className="scratch-hint">
-          Scratch 50% to reveal · <span lang="ne">५०% कोरेर हेर्नुहोस्</span>
+          Scratch 50% to reveal · <span lang="hi">५०% तक रगड़कर देखें</span>
         </span>
       )}
       <span className="memory-caption">
@@ -106,6 +105,7 @@ function ScratchCard({ item, index, onOpen, onActivity }: { item: Photo; index: 
 }
 
 export default function MemoriesGallery({ photos }: { photos: Photo[] }) {
+  const soloPhotoCount = 11;
   const [active, setActive] = useState<number | null>(null);
   const [position, setPosition] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -189,7 +189,7 @@ export default function MemoriesGallery({ photos }: { photos: Photo[] }) {
 
   return (
     <>
-      <div className="gallery-note"><span>{photos.length} little memories, a whole lot of love</span><span>Tap a photo to look closer</span></div>
+      <div className="gallery-note"><span>{soloPhotoCount} solo portraits first · family moments below</span><span>Tap a photo to look closer</span></div>
       <ul ref={galleryRef} className="memory-gallery" aria-label="Hridyansh’s photo memories" style={{ "--mobile-index": position } as CSSProperties} onTouchStart={event => { touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY }; pauseAutoplay(); }} onTouchEnd={event => {
         const start = touchStart.current;
         touchStart.current = null;
@@ -199,21 +199,24 @@ export default function MemoriesGallery({ photos }: { photos: Photo[] }) {
         if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.35) goTo(position + (dx < 0 ? 1 : -1));
       }} onTouchCancel={() => { touchStart.current = null; }}>
         {photos.map((item, index) => (
-          <li key={item.src} className={`memory-item ${index === position ? "is-active" : ""}`} style={{ "--card-rotation": `${rotations[index % rotations.length]}deg`, "--card-depth": `${index % 3 * 5}px` } as CSSProperties}>
-            <div onPointerMove={event => {
+          <Fragment key={item.src}>
+            {index === soloPhotoCount && <li className="memory-group-divider" aria-hidden="true"><span>Family moments</span><span>shared with the people who love him</span></li>}
+            <li className={`memory-item ${index === position ? "is-active" : ""}`} style={{ "--card-rotation": `${rotations[index % rotations.length]}deg`, "--card-depth": `${index % 3 * 5}px` } as CSSProperties}>
+              <div onPointerMove={event => {
               const card = event.currentTarget.querySelector(".memory-card") as HTMLElement | null;
               if (!card || event.pointerType !== "mouse" || !window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) return;
               const bounds = card.getBoundingClientRect();
               card.style.setProperty("--tilt-x", `${((event.clientY - bounds.top) / bounds.height - .5) * -5}deg`);
               card.style.setProperty("--tilt-y", `${((event.clientX - bounds.left) / bounds.width - .5) * 5}deg`);
-            }} onPointerLeave={event => {
+              }} onPointerLeave={event => {
               const card = event.currentTarget.querySelector(".memory-card") as HTMLElement | null;
               card?.style.removeProperty("--tilt-x");
               card?.style.removeProperty("--tilt-y");
-            }}>
-              <ScratchCard item={item} index={index} onOpen={() => setActive(index)} onActivity={pauseAutoplay} />
-            </div>
-          </li>
+              }}>
+                <ScratchCard item={item} index={index} onOpen={() => setActive(index)} onActivity={pauseAutoplay} />
+              </div>
+            </li>
+          </Fragment>
         ))}
       </ul>
       <div className="gallery-dots" aria-label="Choose a memory">

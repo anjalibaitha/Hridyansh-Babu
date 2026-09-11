@@ -21,7 +21,7 @@ export default function ScratchCanvas({
   brushRadius = 26,
   threshold = 50,
   coverTitle = "SCRATCH TO REVEAL",
-  coverSubtitle = "कार्ड कोरेर हेर्नुहोस्",
+  coverSubtitle = "कार्ड पर उंगली चलाकर देखें",
   className = "",
   disabled = false,
 }: ScratchCanvasProps) {
@@ -246,8 +246,6 @@ export default function ScratchCanvas({
   const handlePointerDown = (e: PointerEvent<HTMLCanvasElement>) => {
     if (isRevealed || disabled) return;
     onActivity?.();
-    e.preventDefault();
-    e.stopPropagation();
 
     // Capture pointer so dragging outside canvas still tracks
     try {
@@ -271,8 +269,6 @@ export default function ScratchCanvas({
   const handlePointerMove = (e: PointerEvent<HTMLCanvasElement>) => {
     if (!isScratching.current || isRevealed || disabled) return;
     onActivity?.();
-    e.preventDefault();
-    e.stopPropagation();
 
     const { x, y } = getCanvasCoords(e);
     if (lastPoint.current) {
@@ -292,18 +288,27 @@ export default function ScratchCanvas({
   };
 
   const handlePointerUp = (e: PointerEvent<HTMLCanvasElement>) => {
+    try {
+      if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      }
+    } catch {
+      // Ignore browsers that release capture automatically.
+    }
     if (!isScratching.current) return;
     isScratching.current = false;
     lastPoint.current = null;
-    try {
-      e.currentTarget.releasePointerCapture(e.pointerId);
-    } catch {
-      // Ignore
-    }
     checkScratchPercentage();
   };
 
-  const handlePointerCancel = () => {
+  const handlePointerCancel = (e: PointerEvent<HTMLCanvasElement>) => {
+    try {
+      if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      }
+    } catch {
+      // Ignore browsers that release capture automatically.
+    }
     isScratching.current = false;
     lastPoint.current = null;
   };
@@ -319,7 +324,7 @@ export default function ScratchCanvas({
         position: "absolute",
         inset: 0,
         zIndex: 10,
-        touchAction: "none",
+        touchAction: "pan-y",
         pointerEvents: isFadingOut ? "none" : "auto",
         transition: "opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
         opacity: isFadingOut ? 0 : 1,
@@ -332,7 +337,7 @@ export default function ScratchCanvas({
           display: "block",
           width: "100%",
           height: "100%",
-          touchAction: "none",
+          touchAction: "pan-y",
           cursor: "crosshair",
           borderRadius: "inherit",
           background: "transparent",

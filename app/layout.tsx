@@ -3,10 +3,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Hridyansh Babu · First Birthday Invitation",
-  description: "Join us in celebrating Hridyansh Babu’s first birthday on 16 September 2026 · 2083 भाद्र 31. A little invitation from Nepal, with love, laughter and blessings.",
+  description: "Please join us to celebrate Hridyansh Babu’s first birthday on 16 September 2026 · 31 भाद्र 2083. A little invitation from Nepal, with love, laughter and blessings.",
   openGraph: {
     title: "Hridyansh Babu · First Birthday Invitation",
-    description: "One year of tiny steps, big smiles and endless love. Celebrate with us on 16 September 2026 · 2083 भाद्र 31.",
+    description: "Please join us to celebrate Hridyansh Babu’s first birthday on 16 September 2026 · 31 भाद्र 2083.",
     type: "website",
     locale: "en_US",
     alternateLocale: "ne_NP",

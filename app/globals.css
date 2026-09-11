@@ -26,12 +26,11 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--ink); background: #f8fcfe; font-family: var(--body); line-height: 1.65; -webkit-font-smoothing: antialiased; }
-body.lock-scroll { overflow: hidden; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 6px; }
-[lang="ne"], [lang="sa"] { font-family: "Noto Sans Devanagari", sans-serif; letter-spacing: 0; }
+[lang="hi"], [lang="sa"] { font-family: "Noto Sans Devanagari", sans-serif; letter-spacing: 0; }
 h1, h2, p { overflow-wrap: break-word; }
 
 /* A little envelope, opened with one gentle transition. */
@@ -48,7 +47,7 @@ h1, h2, p { overflow-wrap: break-word; }
 .entry-name span { display: block; font-style: italic; color: var(--gold); }
 .entry-date { margin: 28px 0 32px; font-size: 12px; color: var(--muted-text); letter-spacing: .035em; line-height: 1.9; }
 .open-button { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 10px; row-gap: 3px; width: 260px; max-width: 100%; padding: 16px 22px; border: 1px solid #559bc0; border-radius: 30px; color: #fff; background: #4488ad; box-shadow: 0 8px 24px #488ebc20; cursor: pointer; font-size: 13px; font-weight: 600; transition: transform 220ms, box-shadow 220ms, background 220ms; }
-.open-nepali { flex-basis: 100%; font-size: 11px; font-weight: 400; color: #edf8ff; }
+.open-hindi { flex-basis: 100%; font-size: 11px; font-weight: 400; color: #edf8ff; }
 .open-button:hover { transform: translateY(-3px); background: #37799f; box-shadow: 0 12px 28px #488ebc30; }
 .tap-note { margin: 22px 0 0; color: var(--muted-text); font-size: 11px; }
 .invitation { opacity: 0; visibility: hidden; overflow: clip; transition: opacity 450ms ease; }
@@ -123,19 +122,19 @@ h1, h2, p { overflow-wrap: break-word; }
 .blessing-rule { margin: 30px auto; width: 270px; font-size: 24px; }
 .sanskrit { margin: 0; color: #508db0; font-size: clamp(26px,4vw,36px); font-weight: 400; line-height: 1.8; }
 .blessing-meaning { max-width: 580px; margin: 18px auto 0; color: var(--muted-text); font-family: var(--serif); font-size: 23px; line-height: 1.55; }
-.blessing-nepali { max-width: 550px; margin: 16px auto 0; color: var(--muted-text); font-size: 14px; line-height: 2; }
+.blessing-hindi { max-width: 550px; margin: 16px auto 0; color: var(--muted-text); font-size: 14px; line-height: 2; }
 .date-section { background: var(--soft-blue); }
 .date-inner { display: grid; grid-template-columns: minmax(0,1fr) 280px; gap: 48px; align-items: center; text-align: left; }
 .left-title { max-width: 410px; }
 .body-copy { max-width: 510px; margin: 24px 0 0; color: var(--muted-text); font-family: var(--serif); font-size: 22px; line-height: 1.55; }
-.nepali-copy { margin-top: 16px; font-size: 14px; line-height: 2; }
+.hindi-copy { margin-top: 16px; font-size: 14px; line-height: 2; }
 .date-note { margin: 28px 0 0; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted-text); font-size: 11px; line-height: 2; }
 .date-stamp { position: relative; display: flex; flex-direction: column; align-items: center; padding: 38px 24px 32px; border: 1px solid #c7922e50; outline: 1px solid #c7922e24; outline-offset: -9px; border-radius: 140px 140px 24px 24px; background: #fffef8; box-shadow: 0 12px 32px #6a9bb10a; }
 .stamp-weekday { margin: 20px 0 12px; color: var(--muted-text); font-size: 10px; text-transform: uppercase; letter-spacing: .22em; }
 .date-day { font-family: var(--serif); color: #559bbf; font-size: 100px; font-weight: 400; line-height: 1; }
 .date-month { font-family: var(--serif); font-size: 30px; font-style: italic; line-height: 1.4; }
 .date-year { margin-top: 3px; font-size: 12px; letter-spacing: .25em; color: var(--muted-text); }
-.date-nepali { margin-top: 22px; padding-top: 16px; border-top: 1px solid #c7922e40; color: #956b26; font-size: 13px; }
+.date-hindi { margin-top: 22px; padding-top: 16px; border-top: 1px solid #c7922e40; color: #956b26; font-size: 13px; }
 .countdown-section { background: #fff; }
 .countdown-inner { max-width: 800px; }
 .countdown-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 24px; margin-top: 40px; }
@@ -166,7 +165,7 @@ h1, h2, p { overflow-wrap: break-word; }
 .footer-content { position: relative; z-index: 1; max-width: 650px; margin: 0 auto; }
 .footer-overline { color: var(--soft-yellow); font-size: 10px; }
 .footer-name { margin: 20px 0 10px; color: #fff5cc; font-family: var(--serif); font-size: clamp(45px,7vw,76px); font-weight: 400; line-height: 1.2; }
-.footer-nepali { margin: 0; font-size: 15px; line-height: 1.9; color: #e3f2fb; }
+.footer-hindi { margin: 0; font-size: 15px; line-height: 1.9; color: #e3f2fb; }
 .footer-heart { display: flex; justify-content: center; align-items: center; gap: 18px; margin-top: 24px; color: var(--soft-yellow); font-size: 12px; }
 .footer-heart svg { width: 11px; }
 .back-to-top { display: inline-flex; align-items: center; gap: 8px; margin-top: 36px; padding: 8px 12px; color: #e4f2fa; font-size: 10px; letter-spacing: .1em; transition: color 200ms; }
@@ -226,7 +225,7 @@ h1, h2, p { overflow-wrap: break-word; }
   .section-label { font-size: 10px; letter-spacing: .1em; }
   .section-title { font-size: 36px; }
   .blessing-meaning, .body-copy, .contact-copy { font-size: 21px; }
-  .nepali-copy, .blessing-nepali { font-size: 13px; }
+  .hindi-copy, .blessing-hindi { font-size: 13px; }
   .countdown-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px 24px; margin-top: 32px; }
   .countdown-number { font-size: 56px; }
   .countdown-unit { padding: 20px 8px; }
@@ -260,7 +259,7 @@ h1, h2, p { overflow-wrap: break-word; }
 .cloud-one { translate: 0 0 -40px; }
 .cloud-two { translate: 0 0 -70px; }
 .tiny-star { translate: 0 0 15px; animation: twinkle 5s ease-in-out infinite, star-drift 8s ease-in-out infinite; }
-.entry-date, .hero-message span, .name-note, .blessing-nepali, .nepali-copy, .date-note, .date-nepali, .detail-item small, .contact-number, .footer-nepali { font-size: 16px; }
+.entry-date, .hero-message span, .name-note, .blessing-hindi, .hindi-copy, .date-note, .date-hindi, .detail-item small, .contact-number, .footer-hindi { font-size: 16px; }
 .entry-kicker { font-size: 17px; }
 .date-note { line-height: 1.9; }
 .detail-item small { line-height: 1.8; }
@@ -268,20 +267,24 @@ h1, h2, p { overflow-wrap: break-word; }
 .quote-section { padding: 90px 24px; text-align: center; background: #fffdf6; }
 .quote-star { display: block; color: var(--gold); font-size: 24px; margin-bottom: 20px; }
 .birthday-quote { margin: 0; font-family: var(--serif); font-size: clamp(28px, 3.2vw, 38px); font-weight: 400; font-style: italic; line-height: 1.4; color: #4a7f9d; }
-.quote-nepali { max-width: 580px; margin: 20px auto 0; font-size: 16px; line-height: 1.95; color: var(--muted-text); }
+.quote-hindi { max-width: 580px; margin: 20px auto 0; font-size: 16px; line-height: 1.95; color: var(--muted-text); }
 .closing-quote { background: #edf7fc; }
 .memories-section { padding: 100px 32px; background: #f2f9fc; text-align: center; scroll-margin-top: 24px; }
 .memories-section .section-title > span { display: block; margin-top: 16px; font-size: 23px; color: #688da4; line-height: 1.7; }
 .memories-intro { max-width: 580px; margin: 24px auto 0; color: var(--muted-text); font-family: var(--serif); font-size: 24px; line-height: 1.5; }
 .gallery-note { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 40px 0 8px; padding: 20px 0; border-top: 1px solid var(--border); color: var(--muted-text); font-size: 12px; }
 .memory-gallery { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px 32px; margin: 0; padding: 24px 8px; list-style: none; perspective: 1200px; }
+.memory-group-divider { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; padding: 4px 8px; color: #9c844f; font-size: 11px; letter-spacing: .16em; line-height: 1.4; text-align: left; text-transform: uppercase; }
+.memory-group-divider::before, .memory-group-divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #d8c58f); }
+.memory-group-divider::after { background: linear-gradient(90deg, #d8c58f, transparent); }
+.memory-group-divider span + span { color: var(--muted-text); font-family: var(--serif); font-size: 16px; letter-spacing: 0; text-transform: none; }
 .memory-item { min-width: 0; perspective: 1200px; transform-style: preserve-3d; }
 .memory-pending { opacity: 0; translate: 0 12px; transition: opacity 300ms ease, translate 300ms ease; }
 .memory-revealed, .memory-pending:focus-within { opacity: 1; translate: 0 0; }
 .memory-card { display: block; width: 100%; padding: 14px 14px 20px; border: 1px solid #e6e9e4; border-radius: 20px; background: #fffefa; color: var(--ink); text-align: left; cursor: pointer; box-shadow: 0 12px 25px #53768c13, 0 2px 4px #53768c09; transform: translateZ(var(--card-depth, 0px)) rotateZ(var(--card-rotation, 0deg)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); transform-style: preserve-3d; backface-visibility: hidden; transition: transform 250ms ease, box-shadow 250ms ease; }
 .memory-photo { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 12px; background: #f2f2ec; }
-.scratch-layer, .scratch-canvas-container { position: absolute; inset: 0; z-index: 5; display: block; width: 100%; height: 100%; cursor: crosshair; touch-action: none; border-radius: 12px; background: transparent; overflow: hidden; }
-.scratch-layer-canvas { display: block; width: 100%; height: 100%; touch-action: none; border-radius: inherit; background: transparent; }
+.scratch-layer, .scratch-canvas-container { position: absolute; inset: 0; z-index: 5; display: block; width: 100%; height: 100%; cursor: crosshair; touch-action: pan-y; border-radius: 12px; background: transparent; overflow: hidden; }
+.scratch-layer-canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; border-radius: inherit; background: transparent; }
 .scratch-fade-out { opacity: 0 !important; pointer-events: none; transition: opacity 0.45s ease-out; }
 .scratch-hint { display: block; margin: 12px 2px 0; color: #8a733e; font-size: 11px; line-height: 1.6; letter-spacing: .04em; text-transform: uppercase; }
 .memory-quote { display: block; min-height: 108px; margin: 14px 2px 0; color: var(--muted-text); font-family: var(--serif); font-size: 18px; line-height: 1.35; }
@@ -317,6 +320,7 @@ h1, h2, p { overflow-wrap: break-word; }
 }
 @media (max-width: 768px) {
   .quote-section, .memories-section { padding: 56px 18px; }
+  .memory-group-divider { display: none; }
   .memory-gallery { display: flex; gap: 0; padding: 24px 0 32px; overflow: hidden; overscroll-behavior-x: contain; touch-action: pan-y; }
   .memory-item { flex: 0 0 100%; display: flex; justify-content: center; scroll-snap-align: none; scroll-snap-stop: normal; opacity: .35; translate: none !important; transform: translateX(calc(-100% * var(--mobile-index, 0))); transition: opacity 300ms ease, transform 450ms cubic-bezier(.22,.61,.36,1); }
   .memory-item.is-active { opacity: 1; }
@@ -360,13 +364,13 @@ h1, h2, p { overflow-wrap: break-word; }
 
 /* Comfortable reading sizes for the invitation copy, especially on phones. */
 .entry-kicker, .entry-date, .tap-note { font-size: 17px; }
-.detail-item small, .blessing-nepali, .nepali-copy, .date-note, .contact-number, .footer-nepali { font-size: 17px; }
+  .detail-item small, .blessing-hindi, .hindi-copy, .date-note, .contact-number, .footer-hindi { font-size: 17px; }
 .gallery-note, .scratch-hint, .detail-label, .countdown-label { font-size: 13px; }
 @media (max-width: 480px) {
   .entry-kicker, .entry-date, .tap-note { font-size: 16px; }
   .hero-kicker { font-size: 18px; }
   .hero-subtitle, .invite-line { font-size: 20px; }
-  .detail-item small, .blessing-nepali, .nepali-copy, .date-note, .contact-number, .footer-nepali { font-size: 16px; }
+  .detail-item small, .blessing-hindi, .hindi-copy, .date-note, .contact-number, .footer-hindi { font-size: 16px; }
   .birthday-quote, .memories-intro, .blessing-meaning, .body-copy, .contact-copy { font-size: 22px; }
 }
 
@@ -530,7 +534,7 @@ h1, h2, p { overflow-wrap: break-word; }
   box-shadow: 0 18px 40px rgba(83, 118, 140, 0.16), 0 3px 10px rgba(0, 0, 0, 0.05);
   border: 2px solid #ecdca8;
   background: #fffdf5;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 .card-corner {
@@ -596,7 +600,7 @@ h1, h2, p { overflow-wrap: break-word; }
   margin-bottom: 16px;
 }
 
-.secret-quote-nepali {
+.secret-quote-hindi {
   font-family: "Noto Sans Devanagari", sans-serif;
   font-size: 18px;
   line-height: 1.85;
@@ -761,7 +765,7 @@ h1, h2, p { overflow-wrap: break-word; }
   .secret-baby-name {
     font-size: 30px;
   }
-  .secret-quote-nepali {
+  .secret-quote-hindi {
     font-size: 16px;
   }
   .secret-quote-english {
@@ -1096,7 +1100,7 @@ h1, h2, p { overflow-wrap: break-word; }
   color: #93c5fd;
 }
 
-.cinematic-nepali-blessing {
+.cinematic-invitation-line {
   font-family: "Noto Sans Devanagari", sans-serif;
   font-size: 18px;
   color: #fde68a;
@@ -1547,6 +1551,6 @@ h1, h2, p { overflow-wrap: break-word; }
   .cinematic-stage-content { width: 100%; max-height: 100dvh; padding: 24px 14px 30px; }
   .cinematic-kicker-wrap { gap: 7px; padding-inline: 12px; }
   .cinematic-kicker-tag { font-size: 9px; }
-  .cinematic-nepali-blessing { font-size: 15px; }
+  .cinematic-invitation-line { font-size: 15px; }
   .cinematic-balloon { font-size: 28px; }
 }
