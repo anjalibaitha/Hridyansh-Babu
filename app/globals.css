@@ -1554,3 +1554,86 @@ h1, h2, p { overflow-wrap: break-word; }
   .cinematic-invitation-line { font-size: 15px; }
   .cinematic-balloon { font-size: 28px; }
 }
+
+/* Final mobile fit pass: keep every section inside the viewport without
+   interfering with vertical scrolling or the scratch-card pan-y gesture. */
+html, body { max-width: 100%; overflow-x: hidden; }
+img, canvas, svg { max-width: 100%; }
+
+@media (max-width: 640px) {
+  .entry-gate {
+    padding: max(32px, env(safe-area-inset-top)) 18px max(32px, env(safe-area-inset-bottom));
+  }
+
+  .entry-content,
+  .hero-content,
+  .section-inner,
+  .text-inner,
+  .contact-inner {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-section {
+    min-height: 100svh;
+    padding: max(44px, env(safe-area-inset-top)) 16px max(38px, env(safe-area-inset-bottom));
+  }
+
+  .hero-message,
+  .blessing-meaning,
+  .body-copy,
+  .contact-copy,
+  .memories-intro {
+    max-width: 100%;
+  }
+
+  .blessing-section, .date-section, .countdown-section, .details-section, .contact-section, .memories-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .date-inner { gap: 28px; }
+  .date-stamp { width: min(260px, 100%); }
+  .countdown-grid { gap: 12px; }
+  .countdown-unit { padding-left: 4px; padding-right: 4px; }
+  .countdown-number { font-size: clamp(42px, 15vw, 56px); }
+
+  .scratch-section-inner { width: 100%; }
+  .scratch-header .scratch-instructions { margin-bottom: 28px; }
+  .scratch-card-frame, .scratch-controls { max-width: 100%; }
+  .secret-message-underneath { padding-left: 14px; padding-right: 14px; }
+  .secret-visual-duo { gap: 10px; }
+
+  .memory-caption {
+    align-items: flex-start;
+    font-size: clamp(18px, 6vw, 22px);
+  }
+  .gallery-navigation { gap: clamp(12px, 8vw, 32px); }
+  .gallery-navigation > span { min-width: 84px; }
+
+  .photo-lightbox {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+  .lightbox-toolbar { gap: 8px; font-size: clamp(18px, 6vw, 22px); }
+  .lightbox-figure figcaption { font-size: clamp(18px, 6vw, 24px); }
+  .lightbox-navigation { gap: clamp(10px, 5vw, 16px); }
+}
+
+@media (max-width: 360px) {
+  .entry-name { font-size: 48px; }
+  .entry-sparkle { margin-bottom: 24px; }
+  .portrait-wrap { width: 210px; height: 210px; }
+  .portrait-badge { width: 60px; height: 60px; font-size: 34px; }
+  .cinematic-stage-content { padding-left: 10px; padding-right: 10px; }
+  .cinematic-prince-title { font-size: 30px; }
+  .cinematic-invitation-line { max-width: 280px; font-size: 14px; }
+  .cinematic-photos-montage { gap: 5px; }
+  .montage-card { padding: 5px 5px 7px; }
+  .montage-caption { font-size: 8px; }
+  .montage-caption small { font-size: 7px; }
+  .secret-visual-duo { gap: 6px; }
+  .secret-photo-pod { width: 92px; }
+  .secret-cake-pod { padding-left: 8px; padding-right: 8px; }
+  .round-button { width: 44px; height: 44px; }
+}

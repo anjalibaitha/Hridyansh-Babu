@@ -39,7 +39,6 @@ export default function SecretBirthdayScratch() {
           <p className="section-label">गुप्त शुभकामना · Cinematic Interactive Scratch Card</p>
           <h2 className="section-title" id="secret-wish-title">
             Scratch to Reveal the Birthday Surprise
-            <span lang="hi"> · कार्ड पर उंगली चलाकर शुभकामना और केक देखें</span>
           </h2>
           <p className="scratch-instructions">
             Touch and scratch the shimmering golden foil with your finger to reveal Hridyansh Babu’s photo, birthday cake, and heartfelt blessings. Auto-reveals at 50%!
