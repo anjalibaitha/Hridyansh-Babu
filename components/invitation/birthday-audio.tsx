@@ -88,6 +88,7 @@ export default function BirthdayAudio({ autoPlayTrigger }: BirthdayAudioProps) {
     <>
       <audio
         ref={audioRef}
+        id="birthday-song"
         loop
         playsInline
         preload="auto"

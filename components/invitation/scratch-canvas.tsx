@@ -32,6 +32,7 @@ export default function ScratchCanvas({
   const [isFadingOut, setIsFadingOut] = useState(false);
   const lastCheckTime = useRef(0);
   const animationFrameId = useRef<number | null>(null);
+  const revealPending = useRef(false);
 
   // Paint the celebratory foil on canvas
   const drawCover = useCallback(
@@ -133,6 +134,7 @@ export default function ScratchCanvas({
 
   useEffect(() => {
     initCanvas();
+    revealPending.current = false;
 
     const handleResize = () => {
       // If already revealed, do not re-draw
@@ -148,7 +150,7 @@ export default function ScratchCanvas({
   // Calculate percentage of transparent pixels
   const checkScratchPercentage = useCallback(() => {
     const canvas = canvasRef.current;
-    if (!canvas || isRevealed) return;
+    if (!canvas || isRevealed || revealPending.current) return;
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
@@ -176,6 +178,7 @@ export default function ScratchCanvas({
 
       // Auto-reveal if threshold (50%) is reached!
       if (percent >= threshold) {
+        revealPending.current = true;
         setIsFadingOut(true);
         setTimeout(() => {
           setIsRevealed(true);

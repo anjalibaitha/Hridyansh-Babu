@@ -60,7 +60,7 @@ function ScratchCard({ item, index, onOpen, onActivity }: { item: Photo; index: 
           width={item.width}
           height={item.height}
           sizes="(max-width: 480px) 78vw, (max-width: 768px) 60vw, (max-width: 1024px) 42vw, 290px"
-          loading="eager"
+          loading={index < 3 ? "eager" : "lazy"}
         />
         {!revealed && (
           <ScratchCanvas

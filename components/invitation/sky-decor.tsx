@@ -1,4 +1,6 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useState, type CSSProperties } from "react";
 
 const starPositions = [
   { left: 7, top: 13, size: 4, delay: 0.2 },
@@ -16,6 +18,13 @@ const starPositions = [
 ];
 
 export default function SkyDecor() {
+  const [bouncedBalloon, setBouncedBalloon] = useState<number | null>(null);
+
+  const handleBalloonTap = (index: number) => {
+    setBouncedBalloon(index);
+    setTimeout(() => setBouncedBalloon(null), 900);
+  };
+
   return (
     <div className="sky-decor" aria-hidden="true">
       <div className="moon-glow" />
@@ -42,9 +51,30 @@ export default function SkyDecor() {
       <span className="confetti confetti-four" />
       <span className="cloud cloud-one" />
       <span className="cloud cloud-two" />
-      <span className="balloon balloon-blue balloon-one" />
-      <span className="balloon balloon-yellow balloon-two" />
-      <span className="balloon balloon-blue balloon-three" />
+      <span
+        className={`balloon balloon-blue balloon-one ${bouncedBalloon === 1 ? "balloon-bounce" : ""}`}
+        onClick={() => handleBalloonTap(1)}
+        role="button"
+        tabIndex={-1}
+        style={{ pointerEvents: "auto", cursor: "pointer" }}
+        title="Tap balloon!"
+      />
+      <span
+        className={`balloon balloon-yellow balloon-two ${bouncedBalloon === 2 ? "balloon-bounce" : ""}`}
+        onClick={() => handleBalloonTap(2)}
+        role="button"
+        tabIndex={-1}
+        style={{ pointerEvents: "auto", cursor: "pointer" }}
+        title="Tap balloon!"
+      />
+      <span
+        className={`balloon balloon-blue balloon-three ${bouncedBalloon === 3 ? "balloon-bounce" : ""}`}
+        onClick={() => handleBalloonTap(3)}
+        role="button"
+        tabIndex={-1}
+        style={{ pointerEvents: "auto", cursor: "pointer" }}
+        title="Tap balloon!"
+      />
     </div>
   );
 }
